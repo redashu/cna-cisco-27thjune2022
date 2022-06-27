@@ -185,3 +185,20 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service t
 
 ```
 
+## New CNA  models 
+
+### service less architecture 
+
+<img src="serverless.png">
+
+### application -- monolith model 
+
+<img src="mono.png">
+
+### microservices 
+
+<img src="microservices.png">
+
+
+
+
