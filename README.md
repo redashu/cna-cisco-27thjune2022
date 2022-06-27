@@ -1,1 +1,4 @@
-# cna-cisco-27thjune2022
+## training plan 
+
+<img src="cna.png">
+
