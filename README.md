@@ -54,3 +54,25 @@ type 1 vs type 2
 <img src="final_models.png">
 
 
+### some important cloud charecteristics 
+
+<img src="cloudc.png">
+
+### users and permission in cloud for roles access 
+
+<img src="access.png">
+
+### user access type 
+
+<img src="type.png">
+
+### understanding Migration 
+
+<img src="migration.png">
+
+### services in cloud for general Infra planning 
+
+<img src="infrap.png">
+
+
+
