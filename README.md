@@ -301,6 +301,30 @@ kubernetes-dashboard   Active   6h54m
 [root@client ashuapp]# 
 
 ```
+### Deploy app resources in personal namespace 
+
+```
+224  kubectl  -n ashu-project  apply -f ashudeploy.yaml 
+  225  kubectl  -n ashu-project get deployment 
+  226  kubectl  -n ashu-project get deploy
+  227  kubectl  -n ashu-project expose deploy  ashuwebapp --type NodePort --port 1234 --target-port 80 --name  ashulb1 
+  228  history 
+[root@client ashuapp]# kubectl  -n ashu-project  get svc 
+NAME      TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+ashulb1   NodePort   10.109.224.143   <none>        1234:32395/TCP   16s
+[root@client ashuapp]# 
+[root@client ashuapp]# 
+[root@client ashuapp]# kubectl  config set-context --current --namespace=ashu-project 
+Context "kubernetes-admin@kubernetes" modified.
+[root@client ashuapp]# 
+[root@client ashuapp]# kubectl  get deploy 
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+ashuwebapp   2/2     2            2           107s
+[root@client ashuapp]# kubectl  get svc
+NAME      TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+ashulb1   NodePort   10.109.224.143   <none>        1234:32395/TCP   67s
+```
+
 
 
 
