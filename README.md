@@ -196,5 +196,82 @@ Step 2/5 : LABEL name=ashutoshh
 
 <img src="push1.png">
 
+### time for deployment -- using controllers 
+
+<img src="contr.png">
+
+### generate YAML file 
+
+```
+kubectl  create  deployment  ashuwebapp --image=docker.io/dockerashu/ashuweb:ciscoappv1  --port 80        --dry-run=client -o yaml >ashudeploy.yaml 
+[root@client ashuapp]# kubectl  create  deployment  ashuwebapp --image=docker.io/dockerashu/ashuweb:ciscoappv1  --port 80        --dry-run=client -o yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashuwebapp
+  name: ashuwebapp
+spec:
+  replicas: 1
+  selector:
+
+```
+
+### check deployment 
+
+```
+kubectl apply -f  ashudeploy.yaml 
+deployment.apps/ashuwebapp created
+[root@client ashuapp]# kubectl  get deploy 
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+ashuwebapp   0/1     1            0           4s
+[root@client ashuapp]# kubectl  get po
+NAME                          READY   STATUS              RESTARTS   AGE
+ashuwebapp-7b75dbb8c5-266xw   1/1     Running             0          10s
+ciscoappv1-85ffd84fdc-z7x2w   0/1     ContainerCreating   0          0s
+manuwebapp-79f9d9d544-ldfxr   0/1     ContainerCreating   0          1s
+[root@client ashuapp]# kubectl  get deploy 
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashuwebapp     1/1     1            1           15s
+```
+
+### CNI for container networking 
+
+<img src="cni.png">
+
+### calico cni 
+
+```
+[root@client ashuapp]# kubectl  get  po -n kube-system 
+NAME                                       READY   STATUS    RESTARTS       AGE
+calico-kube-controllers-6766647d54-7xmhb   1/1     Running   1 (154m ago)   5h58m
+calico-node-2m444                          1/1     Running   1 (154m ago)   5h58m
+calico-node-47wvd                          1/1     Running   1 (154m ago)   5h58m
+calico-node-75m4k                          1/1     Running   1 (154m ago)   5h58m
+```
+
+### scaling pod using deploy -- manually 
+
+```
+kubectl   scale deployment  ashuwebapp  --replicas=2
+deployment.apps/ashuwebapp scaled
+[root@client ashuapp]# kubectl  get  deploy 
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+ashuwebapp       2/2     2            2           19m
+```
+
+### type of service 
+
+<img src="stype.png">
+
+```
+ kubectl  expose deployment  ashuwebapp  --type NodePort  --port 1234  --target-port 80 --name ashulb1
+service/ashulb1 exposed
+[root@client ashuapp]# kubectl  get  svc
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+ashulb1      NodePort    10.111.155.185   <none>        1234:31128/TCP   4s
+kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          6h17m
+```
 
 
