@@ -122,6 +122,49 @@ exit
 
 <img src="cir.png">
 
+## all the steps to deploy a application in k8s 
+
+### app to container image 
+
+```
+ docker-compose  down 
+Warning: No resource found to remove for project "ashuapp".
+[root@ip-172-31-0-119 ashuapp]# git clone https://github.com/schoolofdevops/html-sample-app.git
+Cloning into 'html-sample-app'...
+remote: Enumerating objects: 74, done.
+remote: Total 74 (delta 0), reused 0 (delta 0), pack-reused 74
+Receiving objects: 100% (74/74), 1.38 MiB | 6.80 MiB/s, done.
+Resolving deltas: 100% (5/5), done.
+[root@ip-172-31-0-119 ashuapp]# ls
+docker-compose.yaml  html-sample-app
+[root@ip-172-31-0-119 ashuapp]# ls -a html-sample-app/
+.  ..  .git  LICENSE.txt  README.txt  assets  elements.html  generic.html  html5up-phantom.zip  images  index.html
+[root@ip-172-31-0-119 ashuapp]# 
 
 
+```
+
+### add dockerfile to build image 
+
+```
+cat Dockerfile 
+FROM nginx
+LABEL name=ashutoshh
+LABEL email=ashutoshh@linux.com
+COPY html-sample-app  /usr/share/nginx/html/
+EXPOSE 80 
+
+```
+
+### .dockerignore file 
+
+```
+ls -a html-sample-app/
+.  ..  .git  LICENSE.txt  README.txt  assets  elements.html  generic.html  html5up-phantom.zip  images  index.html
+[root@ip-172-31-0-119 ashuapp]# cat .dockerignore 
+html-sample-app/.git
+html-sample-app/LICENSE.txt
+html-sample-app/README.txt
+
+```
 
