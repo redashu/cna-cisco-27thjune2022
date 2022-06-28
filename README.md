@@ -188,4 +188,13 @@ Step 2/5 : LABEL name=ashutoshh
 
 ```
 
+### time to push this image to Image registry 
+
+<img src="reg.png">
+
+### DOCKER HUB 
+
+<img src="push1.png">
+
+
 
