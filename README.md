@@ -78,6 +78,24 @@ ashucdb1            "docker-entrypoint.s…"   ashubackdb          running      
 
 ```
 
+### sample check 
 
+```
+
+[root@ip-172-31-0-119 ashuapp]# docker exec -it  ashucdb1  bash 
+root@0ba2c311c80d:/# cd /var/lib/mysql
+root@0ba2c311c80d:/var/lib/mysql# ls
+ashudb	  ca-key.pem  client-cert.pem  ib_buffer_pool  ib_logfile1  ibtmp1  performance_schema	public_key.pem	 server-key.pem
+auto.cnf  ca.pem      client-key.pem   ib_logfile0     ibdata1	    mysql   private_key.pem	server-cert.pem  sys
+root@0ba2c311c80d:/var/lib/mysql# ls  ashudb 
+db.opt		    wp_links.frm     wp_postmeta.ibd		wp_term_taxonomy.frm  wp_terms.ibd
+wp_commentmeta.frm  wp_links.ibd     wp_posts.frm		wp_term_taxonomy.ibd  wp_usermeta.frm
+wp_commentmeta.ibd  wp_options.frm   wp_posts.ibd		wp_termmeta.frm       wp_usermeta.ibd
+wp_comments.frm     wp_options.ibd   wp_term_relationships.frm	wp_termmeta.ibd       wp_users.frm
+wp_comments.ibd     wp_postmeta.frm  wp_term_relationships.ibd	wp_terms.frm	      wp_users.ibd
+root@0ba2c311c80d:/var/lib/mysql# exit
+exit
+
+```
 
 
