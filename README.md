@@ -98,4 +98,30 @@ exit
 
 ```
 
+### problem with containers -- 
+
+<img src="prob_container.png">
+
+### CNA -- new approach 
+
+<img src="cna.png">
+
+### k8s architecture 
+
+<img src="k8sarch.png">
+
+### Swarm and k8s 
+
+<img src="k8s1.png">
+
+### OCI and RUNC 
+
+<img src="oci.png">
+
+### OCI and CRI 
+
+<img src="cir.png">
+
+
+
 
