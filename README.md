@@ -278,5 +278,30 @@ kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          6h17m
 ### service to pod 
 <img src="s2pod.png">
 
+### creating namespace for isolation and security 
+
+```
+ kubectl  get  ns
+NAME                   STATUS   AGE
+default                Active   6h56m
+kube-node-lease        Active   6h56m
+kube-public            Active   6h56m
+kube-system            Active   6h56m
+kubernetes-dashboard   Active   6h54m
+[root@client ashuapp]# kubectl   create  ns ashu-project 
+namespace/ashu-project created
+[root@client ashuapp]# kubectl  get  ns
+NAME                   STATUS   AGE
+ashu-project           Active   2s
+default                Active   6h56m
+kube-node-lease        Active   6h56m
+kube-public            Active   6h56m
+kube-system            Active   6h56m
+kubernetes-dashboard   Active   6h54m
+[root@client ashuapp]# 
+
+```
+
+
 
 
