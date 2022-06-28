@@ -167,4 +167,25 @@ html-sample-app/LICENSE.txt
 html-sample-app/README.txt
 
 ```
+### building image 
+
+```
+ docker  build -t  ashuweb:ciscoappv1 . 
+Sending build context to Docker daemon  2.101MB
+Step 1/5 : FROM nginx
+latest: Pulling from library/nginx
+b85a868b505f: Already exists 
+f4407ba1f103: Pull complete 
+4a7307612456: Pull complete 
+935cecace2a0: Pull complete 
+8f46223e4234: Pull complete 
+fe0ef4c895f5: Pull complete 
+Digest: sha256:10f14ffa93f8dedf1057897b745e5ac72ac5655c299dade0aa434c71557697ea
+Status: Downloaded newer image for nginx:latest
+ ---> 55f4b40fe486
+Step 2/5 : LABEL name=ashutoshh
+ ---> Running in 9c754353c91b
+
+```
+
 
