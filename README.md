@@ -267,11 +267,16 @@ ashuwebapp       2/2     2            2           19m
 
 ```
  kubectl  expose deployment  ashuwebapp  --type NodePort  --port 1234  --target-port 80 --name ashulb1
+ 
+ ====
 service/ashulb1 exposed
 [root@client ashuapp]# kubectl  get  svc
 NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
 ashulb1      NodePort    10.111.155.185   <none>        1234:31128/TCP   4s
 kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          6h17m
 ```
+### service to pod 
+<img src="s2pod.png">
+
 
 
