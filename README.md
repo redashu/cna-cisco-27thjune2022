@@ -155,4 +155,26 @@ ashu-route-rule-1   nginx   www.ashu.io             80      5s
 
 ```
 
+### CI | CD 
+
+<img src="cicd.png">
+
+### tools 
+
+<img src="tools.png">
+
+### jenkins machine intro 
+
+<img src="jenkins.png">
+
+### jenkins container app testing code 
+
+```
+docker rm ashuc1 -f &>/dev/null
+docker run -d --name ashuc1 ashuwebapp:ciscov1
+ip=`docker inspect  ashuc1 --format='{{.NetworkSettings.IPAddress}}'`
+curl -f http://$ip/health.html
+```
+
+
 
