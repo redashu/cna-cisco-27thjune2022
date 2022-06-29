@@ -176,5 +176,53 @@ ip=`docker inspect  ashuc1 --format='{{.NetworkSettings.IPAddress}}'`
 curl -f http://$ip/health.html
 ```
 
+### creating deployment 
+
+```
+
+```
+
+### creating service 
+
+```
+ kubectl  create  service 
+Create a service using a specified subcommand.
+
+Aliases:
+service, svc
+
+Available Commands:
+  clusterip      Create a ClusterIP service
+  externalname   Create an ExternalName service
+  loadbalancer   Create a LoadBalancer service
+  nodeport       Create a NodePort service
+
+Usage:
+  kubectl create service [flags] [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+[root@client final_deploy]# kubectl  create  service  clusterip  ashulbfinal --tcp 1234:80 --dry-run=client -o yaml >svc.yaml 
+[root@client final_deploy]# 
+
+
+```
+
+### pod labels must be used by selector of service to create EP 
+
+### jenkins deployment on k8s code 
+
+```
+kubectl apply -f . 
+sleep 1
+kubectl get deployment -n ashu-project 
+sleep 2
+kubectl get po,svc,ingress -n ashu-project 
+# appling autoscaling 
+kubectl  autoscale  deployment  ashu-cisco-app  --min=3 --max=10 --cpu-percent 70 -n ashu-project
+sleep 1
+kubectl get hpa -n ashu-project 
+```
+
 
 
