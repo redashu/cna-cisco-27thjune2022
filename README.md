@@ -115,3 +115,44 @@ ashulb1   ClusterIP   10.101.242.166   <none>        1234/TCP   3s
 
 ```
 
+### routing rules 
+
+```
+cat ashu_route.yaml 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ashu-route-rule-1
+  namespace: ashu-project 
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx # name of class means product code name of ingress 
+  rules:
+  - host: www.ashu.io 
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ashulb1 # name of internal lb / svc 
+            port:
+              number: 80
+
+```
+
+### creating routing rules 
+
+```
+kubectl  apply -f ashu_route.yaml 
+ingress.networking.k8s.io/ashu-route-rule-1 created
+[root@client ashuapp]# 
+[root@client ashuapp]# kubectl  get ingress
+NAME                CLASS   HOSTS         ADDRESS   PORTS   AGE
+ashu-route-rule-1   nginx   www.ashu.io             80      5s
+[root@client ashuapp]# 
+
+```
+
+
