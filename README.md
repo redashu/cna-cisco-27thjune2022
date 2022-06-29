@@ -75,3 +75,43 @@ status: {}
 
 ```
 
+### deploy yAML
+
+```
+kubectl apply -f ashucat.yaml 
+deployment.apps/ashuapp created
+[root@client ashuapp]# kubectl  get deploy
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+ashuapp   2/2     2            2           18s
+[root@client ashuapp]# kubectl  get po -o wide
+NAME                      READY   STATUS    RESTARTS   AGE   IP                NODE      NOMINATED NODE   READINESS GATES
+ashuapp-cf5cf7c78-5r9t2   1/1     Running   0          25s   192.168.34.15     minion1   <none>           <none>
+ashuapp-cf5cf7c78-pgcfc   1/1     Running   0          25s   192.168.179.209   minion2   <none>           <none>
+[root@client ashuapp]# 
+
+```
+
+### creating cluster IP type service 
+
+```
+ kubectl  get  deploy 
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+ashuapp   2/2     2            2           9m2s
+[root@client ashuapp]# kubectl  expose deploy  ashuapp --type ClusterIP --port 1234 --target-port 80 --name ashulb1 
+service/ashulb1 exposed
+[root@client ashuapp]# kubectl  get  svc 
+NAME      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+ashulb1   ClusterIP   10.107.218.150   <none>        1234/TCP   7s
+[root@client ashuapp]# kubectl  delete svc ashulb1 
+service "ashulb1" deleted
+[root@client ashuapp]# kubectl  expose deploy  ashuapp --type ClusterIP --port 1234 --target-port 80 --name ashulb1  --dry-run=client -o yaml  >ashucatsvc.yaml 
+[root@client ashuapp]# kubectl  apply -f ashucatsvc.yaml 
+service/ashulb1 created
+[root@client ashuapp]# kubectl  get svc
+NAME      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+ashulb1   ClusterIP   10.101.242.166   <none>        1234/TCP   3s
+[root@client ashuapp]# 
+
+
+```
+
