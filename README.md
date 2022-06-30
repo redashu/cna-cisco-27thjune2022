@@ -170,5 +170,77 @@ metadata:
 
 ```
 
+### webdeployment 
+
+```
+[root@client webapp_db]# cat  web_deploy.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashuwebapp
+  name: ashuwebapp
+  namespace: ashu-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ashuwebapp
+  strategy: {}
+  template: # pod info 
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ashuwebapp
+    spec:
+      containers:
+      - image: wordpress
+        name: wordpress
+        ports:
+        - containerPort: 80
+        envFrom: # calling docker image env variables 
+        - configMapRef:
+           name: ashuweb-config 
+        env: # to call password from secret 
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom: # taking data from secret 
+           secretKeyRef:
+            name: ashudb-sec
+            key: db_pass 
+
+        resources: {}
+status: {}
+
+```
+
+### web service 
+
+```
+ kubectl  create  service nodeport  ashuweblb1 --tcp 1234:80 --namespace ashu-project --dry-run=client -o yaml  >web_svc.yaml
+ [root@client webapp_db]# cat web_svc.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashuweblb1
+  name: ashuweblb1
+  namespace: ashu-project
+spec:
+  ports:
+  - name: 1234-80
+    port: 1234
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: ashuwebapp # label of pods 
+  type: NodePort
+status:
+  loadBalancer: {}
+  
+  
+```
+
 
 
