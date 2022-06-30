@@ -282,6 +282,123 @@ resource "aws_instance"  "ashuvm1" {
 
 ```
 
+## terraform steps 
+
+### for the very first time only -- you have to do 
+
+```
+ ls -a
+.  ..  ec2_vm_create.tf
+[root@client aws_automation]# terraform init 
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/aws...
+- Installing hashicorp/aws v4.20.1...
+- Installed hashicorp/aws v4.20.1 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+[root@client aws_automation]# ls  -a
+.  ..  .terraform  .terraform.lock.hcl  ec2_vm_create.tf
+[root@client aws_automation]# 
+
+```
+
+### always to check what is going to happen -- dry-run "Plan"
+
+```
+
+terraform  plan 
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_instance.ashuvm1 will be created
+  + resource "aws_instance" "ashuvm1" {
+      + ami                                  = "ami-08df646e18b182346"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                   
+```
+
+
+### lets do it -- apply 
+
+```
+ terraform apply 
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_instance.ashuvm1 will be created
+  + resource "aws_instance" "ashuvm1" {
+      + ami                                  = "am
+      
+      Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_instance.ashuvm1: Creating...
+aws_instance.ashuvm1: Still creating... [10s elapsed]
+aws_instance.ashuvm1: Still creating... [20s elapsed]
+aws_instance.ashuvm1: Still creating... [30s elapsed]
+aws_instance.ashuvm1: Still creating... [40s elapsed]
+aws_instance.ashuvm1: Creation complete after 41s [id=i-0076929970fdd2698]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+      
+```
+
+
+### to delete 
+
+```
+ terraform  destroy 
+aws_instance.ashuvm1: Refreshing state... [id=i-0076929970fdd2698]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # aws_instance.ashuvm1 will be destroyed
+  - resource "aws_instance" "ashuvm1" {
+      - ami                                  = "ami-08df646e18b182346" -> null
+      - arn                                  = "arn:aws:ec2:ap-south-1:061112302981:instance/i-0076929970fdd2698" -> null
+      - associate_public_ip_address          = true -> null
+      - availability_zone                    = "ap-south-1b" -> null
+      - cpu_core_count                       = 1 -> null
+      - cpu_threads_per_core                 = 1 -> null
+
+```
+
+
+
 
 
 
