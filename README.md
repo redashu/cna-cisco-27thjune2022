@@ -141,7 +141,34 @@ spec:
 status: {}
 
 ```
+### service clusterIP type for DB 
 
+```
+kubectl  create service clusterip  ashudblb  --tcp 3306:3306 --dry-run=client -o yaml >db_svc.yaml
+```
+
+### web deployment details 
+
+```
+ kubectl  create  deployment ashuwebapp --image=wordpress  --port 80 --namespace=ashu-project --dry-run=client -o yaml >web_deploy.yaml
+```
+
+### webconfig 
+
+```
+cat web_config.yaml 
+apiVersion: v1
+data:
+  WORDPRESS_DB_USER: ashuuser
+  WORDPRESS_DB_HOST: ashudblb  # name of db service 
+  WORDPRESS_DB_NAME: ashudb 
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: ashuweb-config
+  namespace: ashu-project
+
+```
 
 
 
