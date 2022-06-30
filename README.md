@@ -397,6 +397,10 @@ Terraform will perform the following actions:
 
 ```
 
+### service mesh with IStio 
+
+<img src="istio.png">
+
 
 
 
