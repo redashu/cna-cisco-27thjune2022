@@ -239,8 +239,49 @@ spec:
 status:
   loadBalancer: {}
   
-  
+
 ```
+
+### replace container based DB -- to cloud based DB 
+
+<img src="cnadb.png">
+
+### IAC 
+
+<img src="iac.png">
+
+### install terraform anywhere 
+
+### terraform view 
+
+<img src="view.png">
+
+### ec2 creating tf script 
+
+```
+[root@client aws_automation]# cat ec2_vm_create.tf 
+provider "aws"  {
+
+	# access_key = ""
+	# secret_key = ""
+	region = "ap-south-1"
+
+}
+
+resource "aws_instance"  "ashuvm1" {
+
+	ami = "ami-08df646e18b182346" # ami id from aws ec2 
+	instance_type = "t2.micro"
+	tags =  {
+
+		"Name" = "ashuos1"
+	}		
+	key_name = "ashukey" 
+	
+}  
+
+```
+
 
 
 
